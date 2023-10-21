@@ -4,7 +4,7 @@ const Header = (count) => (
   <div className="header-blocks">
     <div className='blocks'>
         <h4>State</h4>
-        <h4>New York, USA</h4>
+        <h4>Florida, USA</h4>
     </div>
     <div className='blocks'>
         <h4>Total Breweries</h4>

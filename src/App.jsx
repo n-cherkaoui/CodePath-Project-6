@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react';
-import viteLogo from '/vite.svg';
 import './App.css';
-import SideNav from "./Components/SideNav";
 import Header from './Components/Header';
 
 function App() {
   const [list, setList] = useState(null);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [selectedCity, setSelectedCity] = useState('All');
-  const [cities, setCities] = useState([]); 
   const [selectedType, setSelectedType] = useState('All');
   const [types, setTypes] = useState([]);
-  const [totCount, setTotCount] = useState(0);
-  const [mostPrev,setMostPrev]= useState('');
+  const [totalCount, settotalCount] = useState(0);
+  const [mostType,setmostType]= useState('');
 
 
   useEffect(() => {
@@ -22,17 +18,10 @@ function App() {
 
   useEffect(() => {
     if (filteredResults && filteredResults.length > 0) {
-      const uniqueCities = getUniqueCities(filteredResults);
-      setCities(uniqueCities);
       const uniqueTypes = getUniqueTypes(filteredResults);
       setTypes(uniqueTypes);
     }
   }, [filteredResults]);
-
-
-  const handleDropdownChange = (e) => {
-    setSelectedCity(e.target.value);
-  };
 
   const handleTypeDropdownChange = (e) => {
     setSelectedType(e.target.value);
@@ -40,21 +29,19 @@ function App() {
 
   const fetchAllBreweries = async () => {
     const response = await fetch(
-      "https://api.openbrewerydb.org/v1/breweries?by_state=new_york"
+      "https://api.openbrewerydb.org/v1/breweries?by_state=Florida"
     );
     const json = await response.json();
     setList(json);
 
-    const uniqueCities = getUniqueCities(json);
     const uniqueTypes = getUniqueTypes(json);
-    setCities(uniqueCities);
     setTypes(uniqueTypes);
     setFilteredResults(json); 
-    setTotCount(json.length);
+    settotalCount(json.length);
 
     const mostCommonType = findMostCommonType(json);
-    setMostPrev(mostCommonType);
-    console.log(mostPrev);
+    setmostType(mostCommonType);
+    console.log(mostType);
   };
 
   const findMostCommonType = (filteredData) => {
@@ -74,33 +61,22 @@ function App() {
 
     return mostCommonType;
   };
-
-  const getUniqueCities = (filteredData) => {
-    return Array.from(
-      new Set(
-        filteredData
-          .filter((brew) => brew.name && brew.phone && brew.brewery_type)
-          .map((brew) => brew.city)
-      )
-    );
-  };
   
   const getUniqueTypes = (filteredData) => {
     return Array.from(
       new Set(
         filteredData
-          .filter((brew) => brew.name && brew.phone && brew.city)
+          .filter((brew) => brew.name)
           .map((brew) => brew.brewery_type)
       )
     );
   };
 
   const filterBreweries = () => {
-    if (selectedCity === 'All' && selectedType === 'All' && !searchInput ) {
+    if (selectedType === 'All' && !searchInput ) {
       setFilteredResults(list); 
     } else {
       const filteredData = list.filter((brew) => {
-        const cityMatch = selectedCity === 'All' || brew.city === selectedCity;
         const typeMatch = selectedType === 'All' || brew.brewery_type === selectedType;
         const searchMatch =
           !searchInput ||
@@ -108,23 +84,22 @@ function App() {
             .join('')
             .toLowerCase()
             .includes(searchInput.toLowerCase());
-        return cityMatch && typeMatch && searchMatch;
+        return typeMatch && searchMatch;
       });
       console.log(filteredData);
       console.log(filteredData.length);
       setFilteredResults(filteredData);
-
     }
   };
 
   useEffect(() => {
     filterBreweries();
-  }, [selectedCity, selectedType, searchInput]);
+  }, [selectedType, searchInput]);
 
   return (
     <div>
       <div className="header-layout">
-      <Header input={totCount} input2={mostPrev} />
+      <Header input={totalCount} input2={mostType} />
       </div>
       <div className="whole-page" style={{ overflow: 'auto', maxHeight: '80vh' }}>
         <div>
@@ -135,15 +110,6 @@ function App() {
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
           />
-          <label htmlFor="cityDropdown" className='dropdown'>City:</label>
-          <select id="cityDropdown" value={selectedCity} onChange={handleDropdownChange}>
-            <option value="All">All</option>
-            {cities.map((city) => (
-              <option key={city} value={city}>
-                {city}
-              </option>
-            ))}
-          </select>
           <label htmlFor="typeDropdown" className='dropdown'>Type:</label>
           <select id="typeDropdown" value={selectedType} onChange={handleTypeDropdownChange}>
             <option value="All">All</option>
@@ -163,9 +129,6 @@ function App() {
                 <td></td>
                 <td><div className='table-header-blocks'>Name</div></td>
                 <td><div className='table-header-blocks'>Type</div></td>
-                <td><div className='table-header-blocks'>Address</div></td>
-                <td><div className='table-header-blocks'>City</div></td>
-                <td><div className='table-header-blocks'>Phone</div></td>
                 <td></td>
               </tr>
               {filteredResults.map((brew) => (
@@ -178,15 +141,6 @@ function App() {
                     <td width="20%" align='left'>
                       <div className='table-data-blocks'>{brew.brewery_type}</div>
                     </td>
-                    <td width="25%" align='left'>
-                      <div className='table-data-blocks'>{brew.address_1}</div>
-                    </td>
-                    <td width="20%" align='left'>
-                      <div className='table-data-blocks'>{brew.city}</div>
-                    </td>
-                    <td width="20%" align='left'>
-                      <div className='table-data-blocks'>{brew.phone}</div>
-                    </td>
                     <td width="2%"></td>
                   </tr>
                 )
@@ -194,9 +148,6 @@ function App() {
             </tbody>
           </table>
         )}
-      </div>
-      <div className='sideNav'>
-        <SideNav />
       </div>
     </div>
   );

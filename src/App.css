@@ -52,20 +52,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgb(245, 245, 245);
 }
 
 .header-layout{
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.9);
   margin-bottom: 10px;
   width:900px;
-  margin-left: 340px;
+  /* margin-left: 340px; */
 }
 
 .whole-page{
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.9);
   width:900px;
-  margin-left: 340px;
+  /* margin-left: 340px; */
   margin-top: 20px;
 }
 
