@@ -31,9 +31,9 @@ body {
   min-height: 100vh;
   padding: 0;
   background-color: black;
-  background-image: url('https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,f_jpg,h_683,q_65,w_1920/v1/clients/ftlauderdale-redesign/Tarpon_River_Brewing_13d1b043-4893-4884-b832-e4f67ead8f05.png');
+  background-image: url('./assets/beer-at-sunset-36pzmhcx1cd0k1f5.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center right;
   background-color: rgba(245, 245, 245, 0.5);
 }
 
