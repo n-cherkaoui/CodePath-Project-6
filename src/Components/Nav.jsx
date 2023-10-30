@@ -5,18 +5,20 @@ import "./Nav.css"
 const Nav = () => {
   return (
     <div className="wholeSite">
-      <div className="sidenav">
-        <div className='heading'>
-          <h2>Brewery Stop🍺</h2>
-        </div>
-        <div >
-          <button className='tabs'>
-            <Link href="/">
-              Home
+      <div className="sideNav">
+        <div className="sidenav">
+          <div className='heading'>
+            <h2>Brew Finder🍺</h2>
+          </div>
+          <div >
+            <Link className="homeButton" to="/">
+              <button className='tabs'>
+                Home
+              </button>
             </Link>
-          </button>
-          <button className='tabs'>Search</button>
-          <button className='tabs'>About</button>
+            <button className='tabs'>Search</button>
+            <button className='tabs'>About</button>
+          </div>
         </div>
       </div>
       <Outlet />

@@ -4,6 +4,7 @@ import './App.css';
 import SideNav from "./routes/SideNav";
 import Header from './Components/Header';
 import { Link } from "react-router-dom";
+import TypeChart from './Components/TypeChart.jsx';
 
 function App() {
   const [list, setList] = useState(null);
@@ -55,7 +56,6 @@ function App() {
 
     const mostCommonType = findMostCommonType(json);
     setMostPrev(mostCommonType);
-    console.log(mostPrev);
   };
 
   const findMostCommonType = (filteredData) => {
@@ -155,8 +155,6 @@ function App() {
             ))}
           </select>
         </div>
-        <div>
-        </div>
         {filteredResults && filteredResults.length > 0 && (
           <table>
             <tbody>
@@ -200,6 +198,7 @@ function App() {
           </table>
         )}
       </div>
+      <TypeChart></TypeChart>
     </div>
   );
 }

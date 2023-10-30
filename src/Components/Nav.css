@@ -1,6 +1,6 @@
-.sidenav{
-    height:100%;
-    width:25%;
+.sideNav {
+    height: 100%;
+    width: 25%;
     position: fixed;
     top: 0;
     left: 0;
@@ -10,7 +10,18 @@
     flex-direction: column;
     align-items: center;
     background-color: rgba(245, 245, 245, 0.5);
-  }
+}
+
+.sidenav {
+    width: 90%;
+}
+
+/* .homeButton {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+} */
+
 /* .wholeSite{
     display: flex;
 } */
