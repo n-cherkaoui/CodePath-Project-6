@@ -11,7 +11,6 @@ const BrewInfo = () => {
     }, []);
     useEffect(() => {
         getBreweryLogo().catch(console.error);
-        console.log(fullDetails)
     }, [fullDetails]);
 
     const fetchBrewery = async () => {

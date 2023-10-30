@@ -4,7 +4,7 @@ Submitted by: **Nawfal Cherkaoui Elmalki**
 
 This web app: **Finds and displays stats about local breweries in Florida**
 
-Time spent: **5** hours spent in total
+Time spent: **10** hours spent in total
 
 ## Required Features
 

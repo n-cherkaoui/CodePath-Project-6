@@ -16,6 +16,7 @@ function App() {
   const [types, setTypes] = useState([]);
   const [totCount, setTotCount] = useState(0);
   const [mostPrev, setMostPrev] = useState('');
+  const [typeCounts, setTypeCounts] = useState({});
 
 
   useEffect(() => {
@@ -73,6 +74,7 @@ function App() {
       }
     });
 
+    setTypeCounts(typeCounts);
     return mostCommonType;
   };
 
@@ -198,7 +200,7 @@ function App() {
           </table>
         )}
       </div>
-      <TypeChart></TypeChart>
+      <TypeChart types={typeCounts} totalTypes={totCount}></TypeChart>
     </div>
   );
 }
