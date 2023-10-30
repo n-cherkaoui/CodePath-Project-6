@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 import viteLogo from '/vite.svg';
 import './App.css';
-import SideNav from "./Components/SideNav";
+import SideNav from "./routes/SideNav";
 import Header from './Components/Header';
+import { Link } from "react-router-dom";
 
 function App() {
   const [list, setList] = useState(null);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [selectedCity, setSelectedCity] = useState('All');
-  const [cities, setCities] = useState([]); 
+  const [cities, setCities] = useState([]);
   const [selectedType, setSelectedType] = useState('All');
   const [types, setTypes] = useState([]);
   const [totCount, setTotCount] = useState(0);
-  const [mostPrev,setMostPrev]= useState('');
+  const [mostPrev, setMostPrev] = useState('');
 
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function App() {
 
   const fetchAllBreweries = async () => {
     const response = await fetch(
-      "https://api.openbrewerydb.org/v1/breweries?by_state=new_york"
+      "https://api.openbrewerydb.org/v1/breweries?by_state=florida"
     );
     const json = await response.json();
     setList(json);
@@ -49,7 +50,7 @@ function App() {
     const uniqueTypes = getUniqueTypes(json);
     setCities(uniqueCities);
     setTypes(uniqueTypes);
-    setFilteredResults(json); 
+    setFilteredResults(json);
     setTotCount(json.length);
 
     const mostCommonType = findMostCommonType(json);
@@ -84,7 +85,7 @@ function App() {
       )
     );
   };
-  
+
   const getUniqueTypes = (filteredData) => {
     return Array.from(
       new Set(
@@ -96,8 +97,8 @@ function App() {
   };
 
   const filterBreweries = () => {
-    if (selectedCity === 'All' && selectedType === 'All' && !searchInput ) {
-      setFilteredResults(list); 
+    if (selectedCity === 'All' && selectedType === 'All' && !searchInput) {
+      setFilteredResults(list);
     } else {
       const filteredData = list.filter((brew) => {
         const cityMatch = selectedCity === 'All' || brew.city === selectedCity;
@@ -124,7 +125,7 @@ function App() {
   return (
     <div>
       <div className="header-layout">
-      <Header input={totCount} input2={mostPrev} />
+        <Header input={totCount} input2={mostPrev} />
       </div>
       <div className="whole-page" style={{ overflow: 'auto', maxHeight: '80vh' }}>
         <div>
@@ -171,32 +172,33 @@ function App() {
               {filteredResults.map((brew) => (
                 (brew.name && brew.address_1 && brew.brewery_type && brew.phone) && (
                   <tr key={brew.id}>
-                    <td width="1%"></td>
-                    <td width="40%" align='left'>
-                      <div className='table-data-blocks'>{brew.name}</div>
-                    </td>
-                    <td width="20%" align='left'>
-                      <div className='table-data-blocks'>{brew.brewery_type}</div>
-                    </td>
-                    <td width="25%" align='left'>
-                      <div className='table-data-blocks'>{brew.address_1}</div>
-                    </td>
-                    <td width="20%" align='left'>
-                      <div className='table-data-blocks'>{brew.city}</div>
-                    </td>
-                    <td width="20%" align='left'>
-                      <div className='table-data-blocks'>{brew.phone}</div>
-                    </td>
-                    <td width="2%"></td>
+                    <Link
+                      to={`/brewDetails/${brew.id}`}
+                      key={brew.id} width="1%"
+                      element={brew.id}>
+                      <td width="40%" align='left'>
+                        <div className='table-data-blocks'>{brew.name}</div>
+                      </td>
+                      <td width="20%" align='left'>
+                        <div className='table-data-blocks'>{brew.brewery_type}</div>
+                      </td>
+                      <td width="25%" align='left'>
+                        <div className='table-data-blocks'>{brew.address_1}</div>
+                      </td>
+                      <td width="20%" align='left'>
+                        <div className='table-data-blocks'>{brew.city}</div>
+                      </td>
+                      <td width="20%" align='left'>
+                        <div className='table-data-blocks'>{brew.phone}</div>
+                      </td>
+                      <td width="2%"></td>
+                    </Link>
                   </tr>
                 )
               ))}
             </tbody>
           </table>
         )}
-      </div>
-      <div className='sideNav'>
-        <SideNav />
       </div>
     </div>
   );
