@@ -21,6 +21,7 @@ function App() {
 
   useEffect(() => {
     fetchAllBreweries().catch(console.error);
+    console.log(list)
   }, []);
 
   useEffect(() => {
@@ -157,41 +158,34 @@ function App() {
             ))}
           </select>
         </div>
+        <div className="data">
         {filteredResults && filteredResults.length > 0 && (
           <table>
             <tbody>
               <tr>
-                <td></td>
-                <td><div className='table-header-blocks'>Name</div></td>
-                <td><div className='table-header-blocks'>Type</div></td>
-                <td><div className='table-header-blocks'>Address</div></td>
-                <td><div className='table-header-blocks'>City</div></td>
-                <td><div className='table-header-blocks'>Phone</div></td>
-                <td></td>
+                <td width="40%"><div className='table-header-blocks'>Name</div></td>
+                <td width="30%"><div width="30%" className='table-header-blocks'>Type</div></td>
+                <td width="30%"><div width="30%" className='table-header-blocks'>City</div></td>
+                <td width="0.93%"></td>
               </tr>
               {filteredResults.map((brew) => (
                 (brew.name && brew.address_1 && brew.brewery_type && brew.phone) && (
                   <tr key={brew.id}>
                     <Link
+                      className="brewLink"
                       to={`/brewDetails/${brew.id}`}
-                      key={brew.id} width="1%"
+                      key={brew.id}
                       element={brew.id}>
                       <td width="40%" align='left'>
                         <div className='table-data-blocks'>{brew.name}</div>
                       </td>
-                      <td width="20%" align='left'>
+                      <td width="30%" align='left'>
                         <div className='table-data-blocks'>{brew.brewery_type}</div>
                       </td>
-                      <td width="25%" align='left'>
-                        <div className='table-data-blocks'>{brew.address_1}</div>
-                      </td>
-                      <td width="20%" align='left'>
+                      <td width="30%" align='left'>
                         <div className='table-data-blocks'>{brew.city}</div>
                       </td>
-                      <td width="20%" align='left'>
-                        <div className='table-data-blocks'>{brew.phone}</div>
-                      </td>
-                      <td width="2%"></td>
+                      <td></td>
                     </Link>
                   </tr>
                 )
@@ -199,8 +193,9 @@ function App() {
             </tbody>
           </table>
         )}
+        <TypeChart types={typeCounts} totalTypes={totCount}></TypeChart>
+        </div>
       </div>
-      <TypeChart types={typeCounts} totalTypes={totCount}></TypeChart>
     </div>
   );
 }

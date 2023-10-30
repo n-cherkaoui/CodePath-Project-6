@@ -16,8 +16,6 @@ const Nav = () => {
                 Home
               </button>
             </Link>
-            <button className='tabs'>Search</button>
-            <button className='tabs'>About</button>
           </div>
         </div>
       </div>

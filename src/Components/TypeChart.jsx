@@ -40,9 +40,9 @@ const TypeChart = ({ types, totalTypes }) => {
   };
 
     return (
-        <div className="pieChart" style={{ width: 400, height: 300 }}>
+        <div className="pieChart" style={{width: 400, height: 350}}>
             <h2>Brewery Types</h2>
-            <ResponsiveContainer width="100%" height="80%">
+            <ResponsiveContainer width="100%" height="75%">
                 <PieChart>
                     <Pie
                         data={data}

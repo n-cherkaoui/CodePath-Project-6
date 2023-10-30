@@ -34,7 +34,7 @@ body {
   background-image: url('./assets/beer-at-sunset-36pzmhcx1cd0k1f5.jpg');
   background-size: cover;
   background-position: center right;
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.7);
 }
 
 h1 {
@@ -59,6 +59,10 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.message {
+  background-color: rgba(245, 245, 245, 0.7);
 }
 
 

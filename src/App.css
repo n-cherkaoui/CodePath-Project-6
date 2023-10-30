@@ -42,17 +42,20 @@
 }
 
 .header-layout{
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.7);
   margin-bottom: 10px;
   width:900px;
   margin-left: 340px;
 }
 
 .whole-page{
-  background-color: rgba(245, 245, 245, 0.5);
+  background-color: rgba(245, 245, 245, 0.7);
   width:900px;
   margin-left: 340px;
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header-blocks {
@@ -96,18 +99,33 @@
  }
 
 .table-header-blocks{
-  margin-top: 10px;
   background-color: rgba(0, 0, 0, 0.15);
   font-size: 16px;
   font-weight: bold;
   color: black;
 }
-
-
+.data {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  width: 95%;
+}
+table {
+  width: 50%;
+}
+tr {
+  display: flex;
+  width: 100%;
+}
+.brewLink{
+  width: 100%;
+}
 .table-data-blocks{
   font-size: 14px;
+  min-height: 3em;
   color: black;
   background-color: rgba(0, 0, 0, 0.03);
+  font-weight: bold;
 }
 
 .searchBtn{
@@ -136,4 +154,9 @@
 
 .tabs:hover{
   border: 1px solid black;
+}
+
+.emptyRow {
+  display: flex;
+  justify-content: center;
 }

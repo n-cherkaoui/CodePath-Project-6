@@ -12,6 +12,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path="/" element={<SideNav />}>
         <Route index={true} element={<App />} />
         <Route index={false} path="/brewDetails/:id" element={<DetailView />} />
+        <Route path="*" element={
+          <div>
+            <p className="message">There's nothing here!</p>
+          </div>
+        }
+        />
       </Route>
     </Routes>
   </BrowserRouter>
